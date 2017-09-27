@@ -14,7 +14,7 @@ function addAsync(x, y) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(x * y)
-    }, 200)
+    }, 2000)
   })
 }
 
