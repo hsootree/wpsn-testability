@@ -3,10 +3,13 @@ const assert = require('assert')
 const {
   addAsync,
   addSync,
+  mulSync,
+  mulAsync,
   throwErrorIfNegative
 } = require('../src/functions')
 
-describe('functions', function () {
+describe('functions', function() {
+  // //더하기 함수
   describe('addSync', function() {
     it('기본 기능', function() {
       const result = addSync(1, 2)
@@ -38,6 +41,41 @@ describe('functions', function () {
       assert.equal(result, 3)
     })
   })
+
+  // //곱하기 함수
+
+  describe('mulSync', function() {
+    it('기본 기능', function() {
+      const result = mulSync(1, 4)
+      assert.equal(result, 4)
+    })
+  })
+
+  describe('mulAsync', function() {
+    // 비동기 작업의 테스트가 완료되었다는 사실을 알리기 위해 done 콜백을 호출합니다.
+    it('기본 기능 (done)', function(done) {
+      mulAsync(1, 4)
+        .then(result => {
+          assert.equal(result, 4)
+          done()
+        })
+    })
+
+    // 혹은 Promise를 리턴하거나
+    it('기본 기능 (Promise)', function() {
+      return mulAsync(1, 4)
+        .then(result => {
+          assert.equal(result, 4)
+        })
+    })
+
+    // async/await 를 사용할 수도 있습니다.
+    it('기본 기능 (async/await)', async function() {
+      const result = await mulAsync(1, 4)
+      assert.equal(result, 4)
+    })
+  })
+
 
   describe('throwErrorIfNegative', function() {
     it('양수일 때 문제 없이 값을 반환', function() {
